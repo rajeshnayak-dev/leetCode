@@ -1,20 +1,19 @@
 class Solution {
-    int cntArr(int [] nums, int n){
-        int split = 1, sum = 0;
+    int cntArray(int [] nums, int val){
+        int arrnum = 1, sum = 0;
+
         for(int i = 0; i < nums.length; i++){
-            if(sum + nums[i] <= n){
+            if(sum + nums[i] <= val){
                 sum += nums[i];
             }else{
-                split++;
+                arrnum++;
                 sum = nums[i];
             }
         }
-        return split;
+        return arrnum;
     }
     public int splitArray(int[] nums, int k) {
-        int low = 0;
-        int high = 0;
-
+        int low = 0, high = 0;
         for(int n : nums){
             low = Math.max(low, n);
             high += n;
@@ -22,12 +21,12 @@ class Solution {
 
         while(low < high){
             int mid = low + (high - low) / 2;
-            int val = cntArr(nums, mid);
+            int val = cntArray(nums, mid);
 
             if(val <= k){
                 high = mid;
             }else{
-                low = mid+1;
+                low = mid + 1;
             }
         }
         return low;
