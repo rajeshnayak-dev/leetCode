@@ -1,20 +1,20 @@
 class Solution {
+    int missingNumber(int[]arr, int idx){
+        return arr[idx] - idx - 1;
+    }
     public int findKthPositive(int[] arr, int k) {
-        int cnt = 0;
-        int j = 0;
+        int low = 0, high = arr.length;
 
-        for (int i = 1; i <= arr[arr.length - 1] + k; i++) {
-            if (j < arr.length && i == arr[j]) {
-                j++;
-            } else {
-                cnt++;
-            }
+        while(low < high){
+            int mid = low + (high - low) / 2;
+            int missing = missingNumber(arr, mid);
 
-            if (cnt == k) {
-                return i;
+            if(missing < k){
+                low = mid+1;
+            }else{
+                high = mid;
             }
         }
-
-        return -1;
+        return low + k;
     }
 }
