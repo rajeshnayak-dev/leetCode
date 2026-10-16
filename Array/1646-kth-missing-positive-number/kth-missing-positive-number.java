@@ -1,18 +1,18 @@
 class Solution {
-    int missingNumber(int[]arr, int idx){
+    int missingNum(int [] arr, int idx){
         return arr[idx] - idx - 1;
     }
     public int findKthPositive(int[] arr, int k) {
-        int low = 0, high = arr.length;
+        int low = 0, high = arr.length - 1;
 
-        while(low < high){
+        while(low <= high){
             int mid = low + (high - low) / 2;
-            int missing = missingNumber(arr, mid);
+            int ans = missingNum(arr, mid);
 
-            if(missing < k){
-                low = mid+1;
+            if(ans < k){
+                low = mid + 1;
             }else{
-                high = mid;
+                high = mid - 1;
             }
         }
         return low + k;
