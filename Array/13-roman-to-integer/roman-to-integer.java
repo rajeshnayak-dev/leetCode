@@ -1,30 +1,31 @@
 class Solution {
-    public int romanToInt(String s) {
-        int total = 0;
-
-        for (int i = 0; i < s.length(); i++) {
-            int current = value(s.charAt(i));
-
-            if (i + 1 < s.length() && current < value(s.charAt(i + 1))) {
-                total -= current;
-            } else {
-                total += current;
-            }
+    int convert(char i){
+        switch(i){
+            case 'I' : return 1;
+            case 'V' : return 5;
+            case 'X' : return 10;
+            case 'L' : return 50;
+            case 'C' : return 100;
+            case 'D' : return 500;
+            case 'M' : return 1000;
+            default : return -1;
         }
-
-        return total;
     }
-
-    private int value(char c) {
-        switch (c) {
-            case 'I': return 1;
-            case 'V': return 5;
-            case 'X': return 10;
-            case 'L': return 50;
-            case 'C': return 100;
-            case 'D': return 500;
-            case 'M': return 1000;
-            default: return 0;
+    public int romanToInt(String s) {
+        int i = s.length() - 1;
+        int sum = 0;
+        while(i >= 0){
+            char ch = s.charAt(i);
+            int val = 0;
+            if(i != 0 && convert(s.charAt(i)) > convert(s.charAt(i-1))){
+                val = convert(s.charAt(i)) - convert(s.charAt(i-1));
+                i -= 2;
+            }else{
+                val = convert(s.charAt(i));
+                i--;
+            }
+            sum += val;
         }
+        return sum;
     }
 }
