@@ -1,23 +1,26 @@
 class Solution {
     public double myPow(double x, int n) {
         long N = n;
-        boolean negative = N < 0;
 
-        if (negative) {
+        if (N < 0) {
             N = -N;
         }
 
-        double result = 1.0;
-        double base = x;
+        double ans = 1.0;
 
         while (N > 0) {
-            if ((N & 1) == 1) {
-                result *= base;
+            if (N % 2 == 1) {
+                ans *= x;
             }
-            base *= base;
-            N >>= 1;
+
+            x *= x;
+            N /= 2;
         }
 
-        return negative ? 1.0 / result : result;
+        if (n < 0) {
+            ans = 1.0 / ans;
+        }
+
+        return ans;
     }
 }
