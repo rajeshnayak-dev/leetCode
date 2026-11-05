@@ -1,44 +1,51 @@
-class Solution {
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 
-    ListNode merge2sortedList(ListNode l1, ListNode l2) {
+class Solution {
+    ListNode merge2Lists(ListNode l1, ListNode l2){
+        ListNode temp1 = l1;
+        ListNode temp2 = l2;
 
         ListNode dummy = new ListNode(-1);
         ListNode point = dummy;
 
-        while (l1 != null && l2 != null) {
-
-            if (l1.val <= l2.val) {
-                point.next = l1;
-                l1 = l1.next;
-            } else {
-                point.next = l2;
-                l2 = l2.next;
+        while(temp1 != null && temp2 != null){
+            if(temp1.val <= temp2.val){
+                point.next = temp1;
+                temp1 = temp1.next;
+            }else{
+                point.next = temp2;
+                temp2 = temp2.next;
             }
 
             point = point.next;
         }
 
-        if (l1 != null) {
-            point.next = l1;
-        }
-
-        if (l2 != null) {
-            point.next = l2;
+        if(temp1 != null){
+            point.next = temp1;
+        }else{
+            point.next = temp2;
         }
 
         return dummy.next;
+
     }
-
     public ListNode mergeKLists(ListNode[] lists) {
-
-        if (lists == null || lists.length == 0) {
+        if(lists.length == 0){
             return null;
         }
 
         ListNode result = lists[0];
-
-        for (int i = 1; i < lists.length; i++) {
-            result = merge2sortedList(result, lists[i]);
+        for(int i = 1; i < lists.length; i++){
+            result = merge2Lists(result, lists[i]);
         }
 
         return result;
