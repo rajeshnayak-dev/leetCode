@@ -1,10 +1,20 @@
-class Solution {
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
 
-    ListNode reverse(ListNode head) {
+class Solution {
+    ListNode reverse(ListNode head){
         ListNode prev = null;
         ListNode curr = head;
 
-        while (curr != null) {
+        while(curr != null){
             ListNode nxt = curr.next;
 
             curr.next = prev;
@@ -14,39 +24,33 @@ class Solution {
 
         return prev;
     }
-
     public ListNode reverseKGroup(ListNode head, int k) {
-
-        if (head == null || k == 1) return head;
-
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
-
-        ListNode temp = head;
         ListNode prev = dummy;
 
-        while(temp != null){
-            ListNode curr = temp;
+        ListNode curr = head;
+        while(curr != null){
+            ListNode temp = curr;
             int cnt = 1;
 
-            while(cnt < k && curr != null){
-                curr = curr.next;
+            while(cnt < k && temp != null){
+                temp = temp.next;
                 cnt++;
             }
 
-            if(curr == null) break;
+            if (temp == null) break;
 
-            ListNode nextNode = curr.next;
-            curr.next = null;
+            ListNode nextNode = temp.next;
+            temp.next = null;
 
-            ListNode newNode = reverse(temp);
+            ListNode newNode = reverse(curr);
             prev.next = newNode;
-            temp.next = nextNode;
 
-            prev = temp;
-            temp = nextNode;
+            prev = curr;
             curr = nextNode;
         }
+        prev.next = curr;
 
         return dummy.next;
     }
