@@ -7,16 +7,17 @@ class Solution {
 
         int max = 0;
         for(int n : set){
-            if(!set.contains(n-1)){
-                int cnt = 1, elem = n;
-
-                while(set.contains(elem + 1)){
-                    cnt++; elem++;
-                } 
+            int cnt = 1;
+            if(!set.contains(n - 1)){
+                while(set.contains(n + 1)){
+                    cnt++;
+                    n++;
+                }
 
                 max = Math.max(max, cnt);
             }
         }
+
         return max;
     }
 }
