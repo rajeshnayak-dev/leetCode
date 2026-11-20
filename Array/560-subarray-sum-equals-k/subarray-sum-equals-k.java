@@ -9,7 +9,7 @@ class Solution {
 
             cnt += map.getOrDefault(sum - k, 0);
 
-            map.put(sum, map.getOrDefault(sum, 0) + 1);
+            map.put(sum, map.getOrDefault(sum, 0)+1);
         }
 
         return cnt;
